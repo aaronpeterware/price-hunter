@@ -1,0 +1,25 @@
+{
+  "name": "price-hunter",
+  "version": "1.0.0",
+  "description": "AI-powered price comparison platform",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "scrape": "node scripts/scrape-shopify.js",
+    "api": "node src/api.js",
+    "stats": "node scripts/stats.js",
+    "test:search": "node scripts/test-search.js",
+    "scrape:all": "node scripts/scrape-expanded.js"
+  },
+  "keywords": [
+    "price-comparison",
+    "shopping",
+    "deals"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "cheerio": "^1.1.2"
+  }
+}
