@@ -2,13 +2,13 @@ name: Scrape Products
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 * * * *'  # Every hour
   workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +32,14 @@ jobs:
           TURSO_URL: ${{ secrets.TURSO_URL }}
           TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
         run: node scripts/scrape-expanded.js
+        continue-on-error: true
+
+      - name: Run Jina scraper
+        env:
+          TURSO_URL: ${{ secrets.TURSO_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+        run: node scripts/scrape-jina.js
         continue-on-error: true
 
       - name: Check stats
